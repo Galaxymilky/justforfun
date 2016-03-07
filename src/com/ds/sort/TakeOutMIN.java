@@ -10,7 +10,7 @@ public class TakeOutMIN {
 
         Arrays.sort(array);
 
-        System.out.println("���������Ϊ��");
+        System.out.println("排序后数字为：");
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
         }
@@ -48,7 +48,7 @@ public class TakeOutMIN {
             }
         }
         System.out.print("\n");
-        System.out.println("��С���ظ���Ϊ��" + result);
+        System.out.println("最小不重复数为：" + result);
 
     }
 
@@ -60,7 +60,7 @@ public class TakeOutMIN {
             Arrays.sort(array);
         }
 
-        System.out.println("���������Ϊ��");
+        System.out.println("排序后数字为：");
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
         }
@@ -98,7 +98,7 @@ public class TakeOutMIN {
             }
         }
         System.out.print("\n");
-        System.out.println("��С���ظ���Ϊ��" + result);
+        System.out.println("最小不重复数为：" + result);
     }
 
     public static int getFirstNoRepeatNum(int[] a) {
