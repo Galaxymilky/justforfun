@@ -122,14 +122,18 @@ public class TakeOutMIN {
      */
     public static void main(String[] args) {
 
-        int[] array = {1, 5, 4, 2, 1, 2, 5, 3, 3};
-        outMin(array);
-        String[] array2 = {"1", "5", "4", "2", "2", "5", "3", "3", "7", "8", "8", "9"};
-        outMinOrMax(array2, "desc");
+//        int[] array = {1, 5, 4, 2, 1, 2, 5, 3, 3};
+//        outMin(array);
+//        String[] array2 = {"1", "5", "4", "2", "2", "5", "3", "3", "7", "8", "8", "9"};
+//        outMinOrMax(array2, "desc");
+//
+//        int index = getFirstNoRepeatNum(array);
+//        System.out.println(Arrays.toString(array));
+//        System.out.println(array[index]);
 
-        int index = getFirstNoRepeatNum(array);
-        System.out.println(Arrays.toString(array));
-        System.out.println(array[index]);
+//        new MergingSort();
+
+        new RadixSort();
     }
 
 }
