@@ -5,4 +5,4 @@
  * @author niub
  *
  */
-package com.test;
+package com.rmi;

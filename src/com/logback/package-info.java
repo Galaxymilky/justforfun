@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author liuzn
+ * @author niub
  *
  */
 package com.logback;
