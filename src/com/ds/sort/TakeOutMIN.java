@@ -1,7 +1,6 @@
 package com.ds.sort;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 
 public class TakeOutMIN {
@@ -101,19 +100,45 @@ public class TakeOutMIN {
         System.out.println("最小不重复数为：" + result);
     }
 
-    public static int getFirstNoRepeatNum(int[] a) {
+    public static int firstNoRepeatNum(int[] a) {
         Arrays.sort(a);
 
-        if(a[0] != a[1]){
+        if (a[0] != a[1]) {
             return 0;
         }
-        for(int i=1; i<a.length-2; i++){
-            if(a[i] + a[i+1] != 2*a[i] && a[i+1] + a[i+2] != 2 *a[i+1]){
-                return i+1;
+        for (int i = 1; i < a.length - 2; i++) {
+            if (a[i] + a[i + 1] != 2 * a[i] && a[i + 1] + a[i + 2] != 2 * a[i + 1]) {
+                return i + 1;
             }
         }
 
-        return a.length -1;
+        return a.length - 1;
+    }
+
+    public static String firstNoRepeatChar(String str) {
+
+        LinkedHashMap hashMap = new LinkedHashMap();
+
+        for (int i = 0; i < str.length(); i++) {
+            char key = str.charAt(i);
+            Object valObj = hashMap.get(key);
+            int val = 0;
+            if (valObj != null) {
+                val = Integer.parseInt(valObj + "");
+            }
+
+            hashMap.remove(key);
+            hashMap.put(key, val + 1);
+
+        }
+
+        for (Object obj : hashMap.keySet()) {
+            if(Integer.parseInt(hashMap.get(obj)+"") == 1){
+                return obj + "";
+            }
+        }
+        return "";
+
     }
 
 
@@ -127,7 +152,7 @@ public class TakeOutMIN {
 //        String[] array2 = {"1", "5", "4", "2", "2", "5", "3", "3", "7", "8", "8", "9"};
 //        outMinOrMax(array2, "desc");
 //
-//        int index = getFirstNoRepeatNum(array);
+//        int index = firstNoRepeatNum(array);
 //        System.out.println(Arrays.toString(array));
 //        System.out.println(array[index]);
 
