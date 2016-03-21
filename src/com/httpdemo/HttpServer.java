@@ -16,28 +16,28 @@ import java.util.Iterator;
 public class HttpServer {
     public static void main(String[] args) {
         try {
-            //´´½¨ServerSocketChannel£¬¼àÌı8080¶Ë¿Ú
+            //åˆ›å»ºServerSocketChannelï¼Œç›‘å¬8080ç«¯å£
             ServerSocketChannel ssc = ServerSocketChannel.open();
             ssc.socket().bind(new InetSocketAddress(8080));
-            //ÉèÖÃÎª·Ç×èÈûÄ£Ê½
+            //è®¾ç½®ä¸ºéé˜»å¡æ¨¡å¼
             ssc.configureBlocking(false);
-            //Îªssc×¢²áÑ¡ÔñÆ÷
+            //ä¸ºsscæ³¨å†Œé€‰æ‹©å™¨
             Selector selector = Selector.open();
             ssc.register(selector, SelectionKey.OP_ACCEPT);
-            //´´½¨´¦ÀíÆ÷
+            //åˆ›å»ºå¤„ç†å™¨
             while (true) {
-                //µÈ´ıÇëÇó£¬Ã¿´ÎµÈ´ı×èÈû3s£¬³¬¹ı3sºóÏß³Ì¼ÌĞøÏòÏÂÖ´ĞĞ£¬Èç¹û´«Èë0»òÕß²»´«Èë²ÎÊı½«Ò»Ö±×èÈû
+                //ç­‰å¾…è¯·æ±‚ï¼Œæ¯æ¬¡ç­‰å¾…é˜»å¡3sï¼Œè¶…è¿‡3såçº¿ç¨‹ç»§ç»­å‘ä¸‹æ‰§è¡Œï¼Œå¦‚æœä¼ å…¥0æˆ–è€…ä¸ä¼ å…¥å‚æ•°å°†ä¸€ç›´é˜»å¡
                 if (selector.select(3000) == 0) {
                     continue;
                 }
-                //»ñÈ¡´ı´¦ÀíµÄSelectionKey
+                //è·å–å¾…å¤„ç†çš„SelectionKey
                 Iterator<SelectionKey> keyIter = selector.selectedKeys().iterator();
 
                 while (keyIter.hasNext()) {
                     SelectionKey key = keyIter.next();
-                    //Æô¶¯ĞÂÏß³Ì´¦ÀíSelectionKey
+                    //å¯åŠ¨æ–°çº¿ç¨‹å¤„ç†SelectionKey
                     new Thread(new HttpHandler(key)).run();
-                    //´¦ÀíÍê±Ï£¬´Ó´ı´¦ÀíµÄSelectionKeyµü´úÆ÷ÖĞÒÆ³öµ±Ç°ËùÊ¹ÓÃµÄkey
+                    //å¤„ç†å®Œæ¯•ï¼Œä»å¾…å¤„ç†çš„SelectionKeyè¿­ä»£å™¨ä¸­ç§»å‡ºå½“å‰æ‰€ä½¿ç”¨çš„key
                     keyIter.remove();
                 }
 
@@ -68,43 +68,43 @@ public class HttpServer {
         }
 
         public void handleRead() throws IOException {
-            //»ñÈ¡channel
+            //è·å–channel
             SocketChannel sc = (SocketChannel) key.channel();
-            //»ñÈ¡buffer²¢ÖØÖÃ
+            //è·å–bufferå¹¶é‡ç½®
             ByteBuffer buffer = (ByteBuffer) key.attachment();
             buffer.clear();
-            //Ã»ÓĞ¶Áµ½ÄÚÈİÔò¹Ø±Õ
+            //æ²¡æœ‰è¯»åˆ°å†…å®¹åˆ™å…³é—­
             if (sc.read(buffer) == -1) {
                 sc.close();
             } else {
-                //½ÓÊÕÇëÇóÊı¾İ
+                //æ¥æ”¶è¯·æ±‚æ•°æ®
                 buffer.flip();
                 String receivedString = Charset.forName(localCharset).newDecoder().decode(buffer).toString();
-                //¿ØÖÆÌ¨´òÓ¡ÇëÇó±¨ÎÄÍ·
+                //æ§åˆ¶å°æ‰“å°è¯·æ±‚æŠ¥æ–‡å¤´
                 String[] requestMessage = receivedString.split("\r\n");
                 for (String a : requestMessage) {
                     System.out.println(a);
-                    //Óöµ½¿ÕĞĞËµÃ÷±¨ÎÄÍ·ÒÑ´òÓ¡Íê
+                    //é‡åˆ°ç©ºè¡Œè¯´æ˜æŠ¥æ–‡å¤´å·²æ‰“å°å®Œ
                     if (a.isEmpty()) {
                         break;
                     }
                 }
 
-                //¿ØÖÆÌ¨´òÓ¡Ê×ĞĞĞÅÏ¢
+                //æ§åˆ¶å°æ‰“å°é¦–è¡Œä¿¡æ¯
                 String[] firstLine = requestMessage[0].split(" ");
                 System.out.println();
                 System.out.println("Method:\t" + firstLine[0]);
                 System.out.println("url:\t" + firstLine[1]);
                 System.out.println("HTTP Version:\t" + firstLine[2]);
                 System.out.println();
-                //·µ»Ø¿Í»§¶Ë
+                //è¿”å›å®¢æˆ·ç«¯
                 StringBuffer sendString = new StringBuffer();
-                sendString.append("HTTP/1.1 200 OK\r\n");//ÏìÓ¦±¨ÎÄÊ×ĞĞ¡£200±íÊ¾´¦Àí³É¹¦
+                sendString.append("HTTP/1.1 200 OK\r\n");//å“åº”æŠ¥æ–‡é¦–è¡Œã€‚200è¡¨ç¤ºå¤„ç†æˆåŠŸ
                 sendString.append("Content-Type:text/html;charset=").append(localCharset).append("\r\n");
-                sendString.append("\r\n");//±¨ÎÄÍ·½áÊøºó¼ÓÒ»¸ö¿ÕĞĞ
+                sendString.append("\r\n");//æŠ¥æ–‡å¤´ç»“æŸååŠ ä¸€ä¸ªç©ºè¡Œ
 
-                sendString.append("<html><head><title>ÏÔÊ¾±¨ÎÄ</title></head><body>");
-                sendString.append("½ÓÊÕµ½µÄ±¨ÎÄÊÇ£º<br/>");
+                sendString.append("<html><head><title>æ˜¾ç¤ºæŠ¥æ–‡</title></head><body>");
+                sendString.append("æ¥æ”¶åˆ°çš„æŠ¥æ–‡æ˜¯ï¼š<br/>");
                 for (String s : requestMessage) {
                     sendString.append(s).append("<br/>");
                 }
@@ -120,12 +120,12 @@ public class HttpServer {
         @Override
         public void run() {
             try {
-                //½ÓÊÕµ½Á¬½ÓÇëÇóÊ±
+                //æ¥æ”¶åˆ°è¿æ¥è¯·æ±‚æ—¶
                 if (key.isAcceptable()) {
                     handleAccept();
                 }
 
-                //¶ÁÊı¾İ
+                //è¯»æ•°æ®
                 if (key.isReadable()) {
                     handleRead();
                 }
