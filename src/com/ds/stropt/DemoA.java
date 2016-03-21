@@ -38,5 +38,63 @@ public class DemoA {
         return TakeOutMIN.firstNoRepeatChar(str);
     }
 
+    /**
+     * 判断字符串是否是对称的
+     */
+    public static boolean isSymmetricB(String str) {
+        int len = str.length();
+
+        if (len == 0 || len == 1) {
+            return false;
+        }
+
+        char[] chars = str.toCharArray();
+
+        for (int i = 0; i < len / 2; i++) {
+            if (chars[i] != chars[len - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    /**
+     * 判断字符串是否是对称的
+     */
+    public static boolean isSymmetricA(String str) {
+
+        int len = str.length();
+        if (len == 0 || len == 1) {
+            return false;
+        }
+
+        if (str.length() % 2 == 0) {
+
+            if (str.substring(0, len / 2).equals(strReverse(str.substring(len / 2, len)))) {
+                return true;
+            }
+        } else {
+
+            if (str.substring(0, len / 2).equals(strReverse(str.substring(len / 2 + 1, len)))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 逆序输出字符串
+     */
+    public static String strReverse(String str) {
+
+        String result = "";
+        for (int i = str.length() - 1; i > -1; i--) {
+            result += str.charAt(i);
+        }
+
+        return result;
+    }
 
 }
