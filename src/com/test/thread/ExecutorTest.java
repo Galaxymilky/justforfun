@@ -1,4 +1,4 @@
-package com.test;
+package com.test.thread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class ExecutorTest {
     public static void main(String[] args) {
 //        threadPool_2();
-        threadPool_3();
+//        threadPool_3();
     }
 
     private static void threadPool_1(){
