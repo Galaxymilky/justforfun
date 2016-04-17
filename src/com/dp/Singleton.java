@@ -1,11 +1,11 @@
-package com.dm;
+package com.dp;
 
 /**
  * Created by niu_ben on 2016/3/24.
  *
  * Initialization on Demand Holder
  *
- * 可延迟加载、线程安全
+ * Delayed loading & Thread safety
  */
 public class Singleton {
     private Singleton(){

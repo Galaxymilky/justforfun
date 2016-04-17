@@ -3,7 +3,7 @@ package com.test;
 import java.util.Iterator;
 
 /**
- * Ò»¸ö¼òµ¥µÄÄæĞòÊä³öÔöÇ¿forÑ­»·
+ * ä¸€ä¸ªç®€å•çš„é€†åºè¾“å‡ºå¢å¼ºforå¾ªç¯
  *
  * @author
  */
@@ -30,7 +30,7 @@ public class ReverIterableClass<T> implements Iterable<T> {
 
 
             public void remove() {
-                throw new UnsupportedOperationException("Ä¿Ç°²»Ö§³ÖÉ¾³ı²Ù×÷");
+                throw new UnsupportedOperationException("ç›®å‰ä¸æ”¯æŒåˆ é™¤æ“ä½œ");
             }
         };
     }

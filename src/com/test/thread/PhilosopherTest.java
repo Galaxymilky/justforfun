@@ -1,4 +1,4 @@
-package com.test;
+package com.test.thread;
 
 class Philosopher extends Thread {
     private String name;
@@ -70,7 +70,7 @@ class Fork {
 
         used[i] = false;
         used[(i + 1) % 5] = false;
-        notifyAll();//唤醒其他线程
+        notifyAll();//Wake other threads
     }
 }
 

@@ -4,15 +4,15 @@ import java.util.LinkedList;
 
 class Parent {
     static String name = "hello";
-    //·Ç¾²Ì¬´úÂë¿é
+    //éé™æ€ä»£ç å—
     {
         System.out.println("parent block");
     }
-    //¾²Ì¬´úÂë¿é
+    //é™æ€ä»£ç å—
     static {
         System.out.println("parent static block");
     }
-    //¹¹Ôì·½·¨
+    //æ„é€ æ–¹æ³•
     public Parent() {
         System.out.println("parent constructor");
     }
