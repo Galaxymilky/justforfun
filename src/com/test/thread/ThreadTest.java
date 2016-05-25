@@ -1,6 +1,5 @@
 package com.test.thread;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -14,12 +13,19 @@ import java.util.concurrent.TimeUnit;
 public class ThreadTest {
     public static void main(String[] args) throws InterruptedException {
         Object lock = new Object();
+
+        int x = 9;
+        System.out.println(x >> 2);
+//        if((x >> 2) / 2 > 0){
+//            System.out.println(x);
+//        }
+
         /**
          MyThread_1 thread = new MyThread_1();
          thread.setPriority(6);
          thread.start();
 
-         //����sleep����
+         //测试sleep方法
          //        MyThread_2 mt2 = new MyThread_2();
          //        System.out.println("Begin " + System.currentTimeMillis());
          //        mt2.start();
@@ -46,9 +52,9 @@ public class ThreadTest {
          MyThread_6 mt = new MyThread_6();
          mt.start();
          mt.join();
-         //main�߳̾ͻ�����������ֱ��mt��run()����ִ�����
-         //sleep(2000)���ͷ�����join(2000)�ͷ���
-         System.out.println("���뵱mt����ִ�����֮������ִ�У���������");
+         //main线程就会无限期阻塞直到mt的run()方法执行完毕
+         //sleep(2000)不释放锁，join(2000)释放锁
+         System.out.println("我想当mt对象执行完毕之后我再执行，我做到了");
 
          */
 
@@ -58,26 +64,26 @@ public class ThreadTest {
 //        MyThread_7_2 mt72 = new MyThread_7_2(lock);
 //        mt72.start();
 
-        //��֤��wait()�����ͷ���
+        //验证：wait()方法释放锁
 //        MyThread_8_1 mt0 = new MyThread_8_1(lock);
 //        MyThread_8_1 mt1 = new MyThread_8_1(lock);
 //        mt0.start();
 //        mt1.start();
 
-        //��֤��notify()�������ͷ���
+        //验证：notify()方法不释放锁
 //        MyThread_9_1 mt91 = new MyThread_9_1(lock);
 //        mt91.start();
 //        Thread.sleep(1000);
 //        MyThread_9_2 mt92_1 = new MyThread_9_2(lock);
 //        mt92_1.start();
 
-        //interrupt()���wait()
+        //interrupt()打断wait()
 //        MyThread_10 mt = new MyThread_10(lock);
 //        mt.start();
 //        Thread.sleep(5000);
 //        mt.interrupt();
 
-        //����Object�����notifyAll()�������Ի��Ѵ���ͬһ�������µ����д���wait���߳�
+        //利用Object对象的notifyAll()方法可以唤醒处于同一监视器下的所有处于wait的线程
 //        MyThread_11_1 mt_11_1 = new MyThread_11_1(lock);
 //        MyThread_11_1 mt_11_2 = new MyThread_11_1(lock);
 //        MyThread_11_1 mt_11_3 = new MyThread_11_1(lock);
@@ -92,10 +98,10 @@ public class ThreadTest {
 //        MyThread_12 mt12 = new MyThread_12();
 //        mt12.start();
 
-        // interrupted() ���Ե�ǰ�߳��Ƿ��Ѿ��жϣ�ִ�к���н�״̬��ʶ���Ϊfalse�Ĺ��ܡ����仰˵������������ε��ø÷�������ô���صıض���false��
+        // interrupted() 测试当前线程是否已经中断，执行后具有将状态标识清除为false的功能。换句话说，如果连续两次调用该方法，那么返回的必定是false：
 //        Thread.currentThread().interrupt();
-//        System.out.println("�Ƿ�ֹͣ1��" + Thread.interrupted());
-//        System.out.println("�Ƿ�ֹͣ2��" + Thread.interrupted());
+//        System.out.println("是否停止1？" + Thread.interrupted());
+//        System.out.println("是否停止2？" + Thread.interrupted());
 //        System.out.println("end!");
 
 
@@ -478,7 +484,7 @@ class Timer_1 {
     }
 
     public static void main(String[] args) {
-        //TimerTask ���Զ�����ʽ˳��ִ�У�����ǰһ�������ʱ�����������������ʱ���ӳ�
+        //TimerTask 是以队列形式顺序执行，所以前一个任务耗时过长，后边任务运行时间延迟
         MyTask_1 task_1 = new MyTask_1();
         MyTask_2 task_2 = new MyTask_2();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

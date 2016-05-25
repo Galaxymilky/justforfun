@@ -30,7 +30,6 @@ public class StrOptUtils {
     }
 
     private static String Test1(String str) {
-
         return TakeOutMIN.firstNoRepeatChar(str);
     }
 
@@ -83,7 +82,29 @@ public class StrOptUtils {
     /**
      * 逆序输出字符串
      */
-    public static String strReverse(String str) {
+    public static String strReverse(String s) {
+        long startTime = System.currentTimeMillis();
+
+        if (s == null || "".equals(s)) {
+            return s;
+        }
+        char[] cs = s.toCharArray();
+
+        for (int i = 0; i < cs.length / 2; i++) {
+            char temp = cs[i];
+            cs[i] = cs[cs.length - 1 - i];
+            cs[cs.length - 1 - i] = temp;
+        }
+
+        System.out.println(System.currentTimeMillis() - startTime);
+        return String.valueOf(cs);
+    }
+
+    /**
+     * 逆序输出字符串
+     * Time Limit Exceeded
+     */
+    public static String strReverse_tmp(String str) {
         String result = "";
         for (int i = str.length() - 1; i > -1; i--) {
             result += str.charAt(i);
