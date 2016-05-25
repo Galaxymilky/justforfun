@@ -6,7 +6,18 @@ import java.util.*;
  * Created by dynam on 5/25/2016.
  */
 public class LeetcodeHashTable {
+
     /**
+     * 350. Intersection of Two Arrays II
+     * Given two arrays, write a function to compute their intersection.
+     * Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2].
+     */
+    public static int[] intersect(int[] nums1, int[] nums2) {
+        return null;
+    }
+
+    /**
+     * 349. Intersection of Two Arrays
      * Given two arrays, write a function to compute their intersection.
      * Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2]
      * Each element in the result must be unique.
@@ -127,10 +138,10 @@ public class LeetcodeHashTable {
 //        System.out.println(isSameTree(root1, root2));
 
 
-//        int[] num1 = {};
-//        int[] num2 = {};
-//        int[] res = intersection(num1, num2);
-//        System.out.println(Arrays.toString(res));
+        int[] num1 = {3, 1, 2};
+        int[] num2 = {1, 1};
+        int[] res = intersect(num1, num2);
+        System.out.println(Arrays.toString(res));
     }
 
     private static class ListNode {
