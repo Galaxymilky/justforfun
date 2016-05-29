@@ -16,13 +16,13 @@ public class MergingSort {
 
     public void sort(int[] data, int left, int right) {
         if (left < right) {
-            //ÕÒ³öÖÐ¼äË÷Òý
+            //æ‰¾å‡ºä¸­é—´ç´¢å¼•
             int center = (left + right) / 2;
-            //¶Ô×ó±ßÊý×é½øÐÐµÝ¹é
+            //å¯¹å·¦è¾¹æ•°ç»„è¿›è¡Œé€’å½’
             sort(data, left, center);
-            //¶ÔÓÒ±ßÊý×é½øÐÐµÝ¹é
+            //å¯¹å³è¾¹æ•°ç»„è¿›è¡Œé€’å½’
             sort(data, center + 1, right);
-            //ºÏ²¢
+            //åˆå¹¶
             merge(data, left, center, right);
         }
 
@@ -31,11 +31,11 @@ public class MergingSort {
     public void merge(int[] data, int left, int center, int right) {
         int[] tmpArr = new int[data.length];
         int mid = center + 1;
-        //third¼ÇÂ¼ÖÐ¼äÊý×éµÄË÷Òý
+        //thirdè®°å½•ä¸­é—´æ•°ç»„çš„ç´¢å¼•
         int third = left;
         int tmp = left;
         while (left <= center && mid <= right) {
-            //´ÓÁ½¸öÊý×éÖÐÈ¡³ö×îÐ¡µÄ·ÅÈëÖÐ¼äÊý×é
+            //ä»Žä¸¤ä¸ªæ•°ç»„ä¸­å–å‡ºæœ€å°çš„æ”¾å…¥ä¸­é—´æ•°ç»„
             if (data[left] <= data[mid]) {
                 tmpArr[third++] = data[left++];
             } else {
@@ -44,7 +44,7 @@ public class MergingSort {
 
         }
 
-        //Ê£Óà²¿·ÖÒÀ´Î·ÅÈëÖÐ¼äÊý×é
+        //å‰©ä½™éƒ¨åˆ†ä¾æ¬¡æ”¾å…¥ä¸­é—´æ•°ç»„
         while (mid <= right) {
             tmpArr[third++] = data[mid++];
         }
@@ -53,7 +53,7 @@ public class MergingSort {
             tmpArr[third++] = data[left++];
         }
 
-        //½«ÖÐ¼äÊý×éÖÐµÄÄÚÈÝ¸´ÖÆ»ØÔ­Êý×é
+        //å°†ä¸­é—´æ•°ç»„ä¸­çš„å†…å®¹å¤åˆ¶å›žåŽŸæ•°ç»„
         while (tmp <= right) {
             data[tmp] = tmpArr[tmp++];
         }
